@@ -278,6 +278,7 @@ http://askubuntu.com/questions/569550/assertionerror-using-apache2-and-libapache
 
 1) Install Debian packages needed
 * apt-get install git gcc make python3 python3-dev cyrus-sasl2-dbg libsasl2-dev virtualenvwrapper python3-arrow python3-requests python3-pip libldap2-dev libyaml libyaml-dev apache2 apache2-dev
+
 2) Setup apache config
 * hostname=$(hostname -f)
 * cat ->/etc/apache2/sites-available/001-panopuppet.conf <<EOF
@@ -306,15 +307,18 @@ WSGISocketPrefix /var/run/wsgi
 EOF
 ```
 * a2ensite 001-panopuppet.conf
+
 3) install python modules not available as debian package
 * python3 -m pip install Django==1.8.8
 * python3 -m pip install django-auth-ldap==1.2.7
 * python3 -m pip install pytz
 * python3 -m pip install pyyaml
+
 4) Debian package libapache2-mod-wsgi-py3 does not work for panopuppet
 * python3 -m pip install mod_wsgi
 * /usr/local/bin/mod_wsgi-express install-module
 * a2enmod wsgi_express
+
 5) Clone git Repo and edit config file
 * cd /opt
 * git clone https://github.com/propyless/panopuppet.git
@@ -329,12 +333,15 @@ ALLOWED_HOSTS
 TIME_ZONE
 USE_JSON_BEAUTIFIER : 1
 ```
+
 6) Setup panopuppet files 
 * python3 manage.py migrate
 * python3 manage.py createsuperuser
 * python3 manage.py makemigrations
+
 7) Ownership must be changed to apache user
 * chown -R www-data:www-data /opt/panopuppet
+
 8) start apache service
 * service apache2 restart
 
