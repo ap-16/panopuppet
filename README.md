@@ -279,7 +279,7 @@ http://askubuntu.com/questions/569550/assertionerror-using-apache2-and-libapache
 1) Install Debian packages needed
 * apt-get install git gcc make python3 python3-dev cyrus-sasl2-dbg libsasl2-dev virtualenvwrapper python3-arrow python3-requests python3-pip libldap2-dev libyaml libyaml-dev apache2 apache2-dev
 2) Setup apache config
-* hostname=`hostname -f`
+* hostname=$(hostname -f)
 * cat ->/etc/apache2/sites-available/001-panopuppet.conf <<EOF
 ```
 WSGISocketPrefix /var/run/wsgi
