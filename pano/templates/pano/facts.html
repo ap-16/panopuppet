@@ -85,17 +85,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% if facts_list %}
-                    {% for fact in facts_list %}
-                        <tr>
-                            <td>{{ fact.name }}</td>
-                            <td>{{ fact.value }}</td>
-                        </tr>
-                    {% endfor %}
+                {% if USE_JSON_BEAUTIFIER %}
+		    {{ facts_list_beauty|safe|linebreaksbr|default:"<tr><td>No facts were found in puppetdb</td><td></td></tr>" }}
                 {% else %}
-                    <tr>
-                        <td>No facts were found in puppetdb for node {{ certname }}.</td>
-                    </tr>
+                    {% if facts_list %}
+                        {% for fact in facts_list %}
+                            <tr>
+                                <td>{{ fact.name }}</td>
+                                <td>{{ fact.value }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>No facts were found in puppetdb for node {{ certname }}.</td>
+                        </tr>
+                    {% endif %}
                 {% endif %}
                 </tbody>
             </table>

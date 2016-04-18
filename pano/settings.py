@@ -107,3 +107,6 @@ NODES_DEFAULT_FACTS = cfg.get('NODES_DEFAULT_FACTS',
 # Caching Time Settings
 # Set cache time to 0 to disable caching
 CACHE_TIME = cfg.get('CACHE_TIME', 30)
+
+USE_JSON_BEAUTIFIER = cfg.get('USE_JSON_BEAUTIFIER', 0)
+

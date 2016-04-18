@@ -92,3 +92,6 @@ TIME_ZONE: 'Europe/Stockholm'
 
 # Where should the static files (js, css, etc) be stored?
 STATIC_ROOT: '/srv/staticfiles' # default
+
+# Readable rendering of fact values having JSON format
+USE_JSON_BEAUTIFIER : 1

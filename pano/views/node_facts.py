@@ -42,4 +42,23 @@ def facts(request, certname=None):
     context['certname'] = certname
     context['facts_list'] = facts_list
 
+    import json
+    import html
+    def ap_iter_array(x):
+        s = ''
+        for aph in x:
+            try:
+                s = s + '<tr><td>' + html.escape(aph['name']) + '</td>'
+            except:
+                s = s + '<tr><td>nix</td>'
+            if isinstance(aph['value'], dict):
+                s = s + '<td>' + html.escape(json.dumps(aph['value'], indent=4)).replace(' ', '&nbsp;') + '</td></tr>'
+            else:
+                s = s + '<td>' + html.escape(str(aph['value'])).replace(' ', '&nbsp;') + '</td></tr>'
+        return s
+    facts_list_beauty = ap_iter_array(facts_list)
+    from pano.settings import USE_JSON_BEAUTIFIER
+    context['facts_list_beauty'] = facts_list_beauty
+    context['USE_JSON_BEAUTIFIER'] = USE_JSON_BEAUTIFIER
+
     return render(request, 'pano/facts.html', context)
